@@ -66,7 +66,7 @@
                     <h3 class="text-lg font-semibold">Tambah Produk Baru</h3>
                 </div>
                 <div class="p-4 lg:p-6">
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -95,10 +95,24 @@
                                     placeholder="Masukkan harga" step="1000">
                             </div>
                             <div>
+                                <label for="diskon" class="block text-sm font-medium text-gray-700 mb-2">Diskon (%)</label>
+                                <input type="number" id="diskon" name="diskon" min="0" max="100" step="0.01"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Masukkan diskon dalam persen">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
                                 <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Stok</label>
                                 <input type="number" id="quantity" name="quantity" required
                                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     placeholder="Masukkan jumlah stok">
+                            </div>
+                            <div>
+                                <label for="harga_setelah_diskon" class="block text-sm font-medium text-gray-700 mb-2">Harga Setelah Diskon</label>
+                                <input type="text" id="harga_setelah_diskon" readonly
+                                    class="w-full px-3 py-2 border border-gray-200 rounded-md bg-gray-50 text-gray-700"
+                                    placeholder="Rp 0">
                             </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -162,156 +176,81 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Produk</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Diskon</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga Final</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stok</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse ($products as $product)
                             <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#001</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#{{ $product->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                     <div class="flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                                            <span class="text-xs font-medium">LP</span>
-                                        </div>
+                                        @if($product->path_thumbnail)
+                                            <img src="{{ asset($product->path_thumbnail) }}" alt="{{ $product->nama }}" class="h-8 w-8 rounded-full object-cover">
+                                        @else
+                                            <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
+                                                <span class="text-xs font-medium">{{ substr($product->nama, 0, 2) }}</span>
+                                            </div>
+                                        @endif
                                         <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">Laptop ASUS ROG</div>
-                                            <div class="text-xs text-gray-500">Elektronik</div>
+                                            <div class="text-sm font-medium text-gray-900">{{ $product->nama }}</div>
+                                            <div class="text-xs text-gray-500">{{ $product->category ? $product->category->nama : 'Tidak ada kategori' }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp 15.000.000</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">25</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp {{ number_format($product->harga, 0, ',', '.') }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $product->diskon }}%</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium {{ $product->diskon > 0 ? 'text-green-600' : 'text-gray-900' }}">
+                                    Rp {{ number_format($product->harga * (1 - $product->diskon/100), 0, ',', '.') }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $product->kuantitas }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        Tersedia
-                                    </span>
+                                    @if($product->kuantitas > 0)
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Tersedia
+                                        </span>
+                                    @else
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                            Habis
+                                        </span>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                                    <button class="text-red-600 hover:text-red-900">Hapus</button>
+                                    <a href="{{ route('admin.products.edit', $product->id) }}" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
+                                    <form action="{{ route('admin.products.delete', $product->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
-                            <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#002</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <div class="flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                                            <span class="text-xs font-medium">MS</span>
-                                        </div>
-                                        <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">Mouse Gaming Logitech</div>
-                                            <div class="text-xs text-gray-500">Aksesoris</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp 500.000</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">50</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        Tersedia
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                                    <button class="text-red-600 hover:text-red-900">Hapus</button>
+                            @empty
+                            <tr>
+                                <td colspan="9" class="px-6 py-4 text-center text-gray-500">
+                                    Belum ada produk yang ditambahkan
                                 </td>
                             </tr>
-                            <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#003</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <div class="flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                                            <span class="text-xs font-medium">KB</span>
-                                        </div>
-                                        <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">Keyboard Mechanical</div>
-                                            <div class="text-xs text-gray-500">Aksesoris</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp 1.200.000</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">32</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                        Habis
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                                    <button class="text-green-600 hover:text-green-900 mr-3">Restock</button>
-                                    <button class="text-red-600 hover:text-red-900">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-blue-50 transition-colors duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#004</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    <div class="flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                                            <span class="text-xs font-medium">MN</span>
-                                        </div>
-                                        <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">Monitor LG 27"</div>
-                                            <div class="text-xs text-gray-500">Elektronik</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp 4.500.000</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">12</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        Tersedia
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-blue-600 hover:text-blue-900 mr-3">Edit</button>
-                                    <button class="text-red-600 hover:text-red-900">Hapus</button>
-                                </td>
-                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
 
+                @if(session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                @endif
+
                 <!-- Pagination -->
                 <div class="bg-white px-4 lg:px-6 py-3 flex items-center justify-between border-t border-gray-100">
-                    <div class="flex-1 flex justify-between sm:hidden">
-                        <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                            Previous
-                        </button>
-                        <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                            Next
-                        </button>
-                    </div>
-                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                        <div>
-                            <p class="text-sm text-gray-700">
-                                Menampilkan <span class="font-medium">1</span> hingga <span class="font-medium">10</span> dari{' '}
-                                <span class="font-medium">4</span> hasil
-                            </p>
-                        </div>
-                        <div>
-                            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                                <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                                    Previous
-                                </button>
-                                <button aria-current="page" class="relative inline-flex items-center px-4 py-2 border border-blue-500 bg-blue-50 text-sm font-medium text-blue-600">
-                                    1
-                                </button>
-                                <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                    2
-                                </button>
-                                <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                    3
-                                </button>
-                                <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                    4
-                                </button>
-                                <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                    Next
-                                </button>
-                            </nav>
-                        </div>
+                    <div>
+                        <p class="text-sm text-gray-700">
+                            Menampilkan <span class="font-medium">{{ $products->count() }}</span> produk
+                        </p>
                     </div>
                 </div>
             </div>
@@ -319,8 +258,20 @@
     </div>
 
     <script>
+        // Calculate discounted price
+        function calculateDiscountedPrice() {
+            const harga = parseFloat(document.getElementById('harga').value) || 0;
+            const diskon = parseFloat(document.getElementById('diskon').value) || 0;
+            const discountedPrice = harga * (1 - diskon / 100);
+            
+            document.getElementById('harga_setelah_diskon').value = 'Rp ' + discountedPrice.toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        }
+        
+        document.getElementById('harga').addEventListener('input', calculateDiscountedPrice);
+        document.getElementById('diskon').addEventListener('input', calculateDiscountedPrice);
+
         // Search functionality
-        document.getElementById('search-input').addEventListener('input', function(e) {
+        document.querySelector('input[placeholder="Cari produk..."]').addEventListener('input', function(e) {
             const searchValue = e.target.value.toLowerCase();
             const rows = document.querySelectorAll('tbody tr');
             

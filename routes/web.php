@@ -101,8 +101,10 @@ Route::middleware(['auth:admin'])->group(function () {
         return view('admin_billing');
     })->name('admin.billing');
     
-    Route::get('/admin/products', function () {
-        return view('admin_products');
-    })->name('admin.products');
+    Route::get('/admin/products', [App\Http\Controllers\admin::class, 'products'])->name('admin.products');
+    Route::post('/admin/products', [App\Http\Controllers\admin::class, 'storeProduct'])->name('admin.products.store');
+    Route::get('/admin/products/{id}/edit', [App\Http\Controllers\admin::class, 'editProduct'])->name('admin.products.edit');
+    Route::put('/admin/products/{id}', [App\Http\Controllers\admin::class, 'updateProduct'])->name('admin.products.update');
+    Route::delete('/admin/products/{id}', [App\Http\Controllers\admin::class, 'deleteProduct'])->name('admin.products.delete');
 });
 Route::post('/login', [UserAuth::class, 'login'])->name('login.submit');
