@@ -69,7 +69,13 @@ Route::middleware(['auth:user'])->group(function () {
         return view('promo');
     })->name('promo');
 
-    Route::get('/profile', [UserAuth::class, 'profile'])->name('profile');
+    // Public profile route (no authentication required)
+    Route::get('/profile', function () {
+        return view('profile');
+    })->name('profile');
+    
+    // Protected profile route (require authentication)
+    Route::get('/user/profile', [UserAuth::class, 'profile'])->name('user.profile');
     Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
 });
 
