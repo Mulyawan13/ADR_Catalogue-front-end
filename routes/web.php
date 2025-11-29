@@ -25,6 +25,14 @@ Route::get('/kategori', function () {
     return view('kategori');
 })->name('kategori');
 
+Route::get('/promo', function () {
+    return view('promo');
+})->name('promo');
+
+Route::get('/profile', function () {
+    return view('profile');
+})->name('profile');
+
 
 //testing route
 
@@ -64,16 +72,6 @@ Route::get('/debug-auth', function () {
 
 // Protected routes (require authentication)
 Route::middleware(['auth:user'])->group(function () {
-
-    Route::get('/promo', function () {
-        return view('promo');
-    })->name('promo');
-
-    // Public profile route (no authentication required)
-    Route::get('/profile', function () {
-        return view('profile');
-    })->name('profile');
-    
     // Protected profile route (require authentication)
     Route::get('/user/profile', [UserAuth::class, 'profile'])->name('user.profile');
     Route::post('/logout', [UserAuth::class, 'logout'])->name('logout');
@@ -82,6 +80,23 @@ Route::middleware(['auth:user'])->group(function () {
 
 // Put Submission Route here
 Route::post('/register', [UserAuth::class, 'register'])->name('register.submit');
+
+// Help Pages Routes
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
+
+Route::get('/pengiriman', function () {
+    return view('pengiriman');
+})->name('pengiriman');
+
+Route::get('/pengembalian', function () {
+    return view('pengembalian');
+})->name('pengembalian');
+
+Route::get('/kontak', function () {
+    return view('kontak');
+})->name('kontak');
 // Admin routes
 Route::get('/admin/login', function () {
     return view('admin_login');

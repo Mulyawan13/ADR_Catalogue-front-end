@@ -11,11 +11,6 @@ class userAuth
 {
     public function handle(Request $request, Closure $next): Response
     {
-        // Allow access to profile page without authentication
-        if ($request->is('profile') && !$request->ajax() && !$request->wantsJson()) {
-            return $next($request);
-        }
-        
         if (!Auth::guard('user')->check()) {
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
@@ -24,7 +19,7 @@ class userAuth
                 ], 401);
             }
             
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk mengakses halaman profile.');
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk mengakses halaman ini.');
         }
         
         return $next($request);

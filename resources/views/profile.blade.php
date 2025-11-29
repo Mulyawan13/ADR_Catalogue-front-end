@@ -12,7 +12,10 @@
     <style>
         body { font-family: 'Poppins', sans-serif; }
         .profile-gradient {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 25%, #60a5fa 50%, #3b82f6 75%, #2563eb 100%);
+        }
+        .light-blue-gradient {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 25%, #93c5fd 50%, #60a5fa 75%, #3b82f6 100%);
         }
         .card-hover {
             transition: all 0.3s ease;
@@ -159,7 +162,7 @@
                 <!-- Company Image -->
                 <div class="slide-in" style="animation-delay: 0.2s">
                     <div class="relative">
-                        <div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-8 text-center">
+                        <div class="light-blue-gradient rounded-2xl p-8 text-center">
                             <div class="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center shadow-lg mb-6">
                                 <img src="{{ asset('images/asset/logo.png') }}" alt="ADR Catalogue" class="w-24 h-24 object-contain">
                             </div>
@@ -198,32 +201,32 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center slide-in" style="animation-delay: 0.3s">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-                        <i class="fas fa-box text-2xl text-blue-600"></i>
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-200 rounded-full mb-4">
+                        <i class="fas fa-box text-2xl text-blue-700"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">1,000+</h3>
                     <p class="text-gray-600">Produk Tersedia</p>
                 </div>
                 
                 <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center slide-in" style="animation-delay: 0.4s">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                        <i class="fas fa-users text-2xl text-green-600"></i>
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-sky-200 rounded-full mb-4">
+                        <i class="fas fa-users text-2xl text-sky-700"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">50,000+</h3>
                     <p class="text-gray-600">Pelanggan Puas</p>
                 </div>
                 
                 <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center slide-in" style="animation-delay: 0.5s">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
-                        <i class="fas fa-tags text-2xl text-purple-600"></i>
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-200 rounded-full mb-4">
+                        <i class="fas fa-tags text-2xl text-indigo-700"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">100+</h3>
                     <p class="text-gray-600">Promo Aktif</p>
                 </div>
                 
                 <div class="stat-card bg-white rounded-xl shadow-lg p-6 text-center slide-in" style="animation-delay: 0.6s">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-100 rounded-full mb-4">
-                        <i class="fas fa-star text-2xl text-yellow-600"></i>
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-cyan-200 rounded-full mb-4">
+                        <i class="fas fa-star text-2xl text-cyan-700"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">4.8/5</h3>
                     <p class="text-gray-600">Rating Pelanggan</p>
@@ -249,7 +252,7 @@
                 <!-- Timeline Items -->
                 <div class="space-y-12">
                     <div class="timeline-item relative flex items-center slide-in" style="animation-delay: 0.7s">
-                        <div class="flex-shrink-0 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center z-10">
+                        <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center z-10">
                             <i class="fas fa-flag text-white"></i>
                         </div>
                         <div class="ml-8">
@@ -259,7 +262,7 @@
                     </div>
                     
                     <div class="timeline-item relative flex items-center slide-in" style="animation-delay: 0.8s">
-                        <div class="flex-shrink-0 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center z-10">
+                        <div class="flex-shrink-0 w-12 h-12 bg-sky-600 rounded-full flex items-center justify-center z-10">
                             <i class="fas fa-rocket text-white"></i>
                         </div>
                         <div class="ml-8">
@@ -269,7 +272,7 @@
                     </div>
                     
                     <div class="timeline-item relative flex items-center slide-in" style="animation-delay: 0.9s">
-                        <div class="flex-shrink-0 w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center z-10">
+                        <div class="flex-shrink-0 w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center z-10">
                             <i class="fas fa-award text-white"></i>
                         </div>
                         <div class="ml-8">
@@ -279,7 +282,7 @@
                     </div>
                     
                     <div class="timeline-item relative flex items-center slide-in" style="animation-delay: 1.0s">
-                        <div class="flex-shrink-0 w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center z-10">
+                        <div class="flex-shrink-0 w-12 h-12 bg-cyan-600 rounded-full flex items-center justify-center z-10">
                             <i class="fas fa-star text-white"></i>
                         </div>
                         <div class="ml-8">
@@ -390,24 +393,24 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="text-center slide-in" style="animation-delay: 1.5s">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-                        <i class="fas fa-map-marker-alt text-2xl text-blue-600"></i>
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-200 rounded-full mb-4">
+                        <i class="fas fa-map-marker-alt text-2xl text-blue-700"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Alamat</h3>
                     <p class="text-gray-600">Jl. Contoh No. 123<br>Jakarta, Indonesia 12345</p>
                 </div>
                 
                 <div class="text-center slide-in" style="animation-delay: 1.6s">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-                        <i class="fas fa-phone text-2xl text-green-600"></i>
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-sky-200 rounded-full mb-4">
+                        <i class="fas fa-phone text-2xl text-sky-700"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Telepon</h3>
                     <p class="text-gray-600">+62 21 1234 5678<br>+62 812 3456 7890</p>
                 </div>
                 
                 <div class="text-center slide-in" style="animation-delay: 1.7s">
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
-                        <i class="fas fa-envelope text-2xl text-purple-600"></i>
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-200 rounded-full mb-4">
+                        <i class="fas fa-envelope text-2xl text-indigo-700"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Email</h3>
                     <p class="text-gray-600">info@adrcatalogue.com<br>support@adrcatalogue.com</p>
@@ -417,7 +420,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
@@ -431,44 +434,44 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Menu</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('home') }}" class="text-gray-400 hover:text-white transition-colors">Beranda</a></li>
-                        <li><a href="{{ route('promo') }}" class="text-gray-400 hover:text-white transition-colors">Promo</a></li>
-                        <li><a href="{{ route('kategori') }}" class="text-gray-400 hover:text-white transition-colors">Kategori</a></li>
-                        <li><a href="{{ route('rekomendasi') }}" class="text-gray-400 hover:text-white transition-colors">Rekomendasi</a></li>
-                        <li><a href="{{ route('profile') }}" class="text-gray-400 hover:text-white transition-colors">Profil</a></li>
+                        <li><a href="{{ route('home') }}" class="text-blue-200 hover:text-white transition-colors">Beranda</a></li>
+                        <li><a href="{{ route('promo') }}" class="text-blue-200 hover:text-white transition-colors">Promo</a></li>
+                        <li><a href="{{ route('kategori') }}" class="text-blue-200 hover:text-white transition-colors">Kategori</a></li>
+                        <li><a href="{{ route('rekomendasi') }}" class="text-blue-200 hover:text-white transition-colors">Rekomendasi</a></li>
+                        <li><a href="{{ route('profile') }}" class="text-blue-200 hover:text-white transition-colors">Profil</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Bantuan</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pengiriman</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pengembalian</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Kontak</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-blue-200 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="{{ route('pengiriman') }}" class="text-blue-200 hover:text-white transition-colors">Pengiriman</a></li>
+                        <li><a href="{{ route('pengembalian') }}" class="text-blue-200 hover:text-white transition-colors">Pengembalian</a></li>
+                        <li><a href="{{ route('kontak') }}" class="text-blue-200 hover:text-white transition-colors">Kontak</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Ikuti Kami</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-blue-200 hover:text-white transition-colors">
                             <i class="fab fa-facebook-f text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-blue-200 hover:text-white transition-colors">
                             <i class="fab fa-instagram text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-blue-200 hover:text-white transition-colors">
                             <i class="fab fa-twitter text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-blue-200 hover:text-white transition-colors">
                             <i class="fab fa-youtube text-xl"></i>
                         </a>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <div class="border-t border-blue-700 mt-8 pt-8 text-center text-blue-200">
                 <p>&copy; 2024 ADR Catalogue. All rights reserved.</p>
             </div>
         </div>

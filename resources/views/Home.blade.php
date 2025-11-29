@@ -12,7 +12,10 @@
     <style>
         body { font-family: 'Poppins', sans-serif; }
         .hero-gradient {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 25%, #60a5fa 50%, #3b82f6 75%, #2563eb 100%);
+        }
+        .light-blue-gradient {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 25%, #93c5fd 50%, #60a5fa 75%, #3b82f6 100%);
         }
         .category-card {
             transition: all 0.3s ease;
@@ -20,7 +23,7 @@
         }
         .category-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
         }
         .product-card {
             transition: all 0.3s ease;
@@ -152,22 +155,22 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="relative rounded-xl overflow-hidden shadow-lg banner-slide" style="animation-delay: 0.6s">
-                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-48 flex items-center justify-center">
+                    <div class="light-blue-gradient h-48 flex items-center justify-center">
                         <div class="text-white text-center p-6">
                             <h3 class="text-2xl font-bold mb-2">Promo Spesial</h3>
                             <p class="mb-4">Diskon hingga 50% untuk produk pilihan</p>
-                            <button onclick="window.location.href='{{ route('promo') }}'" class="bg-white text-purple-600 px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition-colors">
+                            <button onclick="window.location.href='{{ route('promo') }}'" class="bg-white text-blue-600 px-6 py-2 rounded-full font-medium hover:bg-blue-50 transition-colors">
                                 Lihat Promo
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="relative rounded-xl overflow-hidden shadow-lg banner-slide" style="animation-delay: 0.8s">
-                    <div class="bg-gradient-to-r from-blue-500 to-teal-500 h-48 flex items-center justify-center">
+                    <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-48 flex items-center justify-center">
                         <div class="text-white text-center p-6">
                             <h3 class="text-2xl font-bold mb-2">Produk Terbaru</h3>
                             <p class="mb-4">Koleksi terkini dengan kualitas terbaik</p>
-                            <button onclick="window.location.href='{{ route('rekomendasi') }}'" class="bg-white text-blue-600 px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition-colors">
+                            <button onclick="window.location.href='{{ route('rekomendasi') }}'" class="bg-white text-blue-600 px-6 py-2 rounded-full font-medium hover:bg-blue-50 transition-colors">
                                 Jelajahi Sekarang
                             </button>
                         </div>
@@ -186,48 +189,62 @@
             </div>
             
             <div class="relative">
-                <button onclick="scrollCategories('left')" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-all">
-                    <i class="fas fa-chevron-left text-gray-600"></i>
+                <!-- Navigation Buttons -->
+                <button onclick="scrollCategories('left')" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all -ml-2 md:-ml-4">
+                    <i class="fas fa-chevron-left text-gray-600 text-lg"></i>
                 </button>
-                <button onclick="scrollCategories('right')" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-all">
-                    <i class="fas fa-chevron-right text-gray-600"></i>
+                <button onclick="scrollCategories('right')" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all -mr-2 md:-mr-4">
+                    <i class="fas fa-chevron-right text-gray-600 text-lg"></i>
                 </button>
                 
-                <div id="categoriesContainer" class="scroll-container overflow-x-auto flex space-x-4 pb-4">
-                    <div class="category-card flex-shrink-0 w-40 cursor-pointer" onclick="window.location.href='#'">
-                        <div class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl p-6 text-center">
-                            <i class="fas fa-laptop text-3xl text-blue-600 mb-3"></i>
-                            <h3 class="font-medium text-gray-800">Elektronik</h3>
+                <!-- Categories Container -->
+                <div id="categoriesContainer" class="scroll-container overflow-x-auto flex space-x-6 pb-6 px-2 md:px-4">
+                    <div class="category-card flex-shrink-0 w-48 md:w-56 cursor-pointer" onclick="window.location.href='#'">
+                        <div class="bg-gradient-to-br from-blue-100 to-blue-300 rounded-2xl p-8 text-center h-48 flex flex-col items-center justify-center">
+                            <i class="fas fa-laptop text-4xl md:text-5xl text-blue-700 mb-4"></i>
+                            <h3 class="font-semibold text-gray-800 text-lg">Elektronik</h3>
                         </div>
                     </div>
-                    <div class="category-card flex-shrink-0 w-40 cursor-pointer" onclick="window.location.href='#'">
-                        <div class="bg-gradient-to-br from-pink-100 to-pink-200 rounded-xl p-6 text-center">
-                            <i class="fas fa-tshirt text-3xl text-pink-600 mb-3"></i>
-                            <h3 class="font-medium text-gray-800">Fashion</h3>
+                    <div class="category-card flex-shrink-0 w-48 md:w-56 cursor-pointer" onclick="window.location.href='#'">
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-200 rounded-2xl p-8 text-center h-48 flex flex-col items-center justify-center">
+                            <i class="fas fa-tshirt text-4xl md:text-5xl text-blue-600 mb-4"></i>
+                            <h3 class="font-semibold text-gray-800 text-lg">Fashion</h3>
                         </div>
                     </div>
-                    <div class="category-card flex-shrink-0 w-40 cursor-pointer" onclick="window.location.href='#'">
-                        <div class="bg-gradient-to-br from-green-100 to-green-200 rounded-xl p-6 text-center">
-                            <i class="fas fa-utensils text-3xl text-green-600 mb-3"></i>
-                            <h3 class="font-medium text-gray-800">Makanan</h3>
+                    <div class="category-card flex-shrink-0 w-48 md:w-56 cursor-pointer" onclick="window.location.href='#'">
+                        <div class="bg-gradient-to-br from-sky-100 to-sky-300 rounded-2xl p-8 text-center h-48 flex flex-col items-center justify-center">
+                            <i class="fas fa-utensils text-4xl md:text-5xl text-sky-700 mb-4"></i>
+                            <h3 class="font-semibold text-gray-800 text-lg">Makanan</h3>
                         </div>
                     </div>
-                    <div class="category-card flex-shrink-0 w-40 cursor-pointer" onclick="window.location.href='#'">
-                        <div class="bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl p-6 text-center">
-                            <i class="fas fa-couch text-3xl text-purple-600 mb-3"></i>
-                            <h3 class="font-medium text-gray-800">Perabotan</h3>
+                    <div class="category-card flex-shrink-0 w-48 md:w-56 cursor-pointer" onclick="window.location.href='#'">
+                        <div class="bg-gradient-to-br from-indigo-100 to-indigo-300 rounded-2xl p-8 text-center h-48 flex flex-col items-center justify-center">
+                            <i class="fas fa-couch text-4xl md:text-5xl text-indigo-700 mb-4"></i>
+                            <h3 class="font-semibold text-gray-800 text-lg">Perabotan</h3>
                         </div>
                     </div>
-                    <div class="category-card flex-shrink-0 w-40 cursor-pointer" onclick="window.location.href='#'">
-                        <div class="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl p-6 text-center">
-                            <i class="fas fa-spa text-3xl text-yellow-600 mb-3"></i>
-                            <h3 class="font-medium text-gray-800">Kosmetik</h3>
+                    <div class="category-card flex-shrink-0 w-48 md:w-56 cursor-pointer" onclick="window.location.href='#'">
+                        <div class="bg-gradient-to-br from-cyan-100 to-cyan-300 rounded-2xl p-8 text-center h-48 flex flex-col items-center justify-center">
+                            <i class="fas fa-spa text-4xl md:text-5xl text-cyan-700 mb-4"></i>
+                            <h3 class="font-semibold text-gray-800 text-lg">Kosmetik</h3>
                         </div>
                     </div>
-                    <div class="category-card flex-shrink-0 w-40 cursor-pointer" onclick="window.location.href='#'">
-                        <div class="bg-gradient-to-br from-red-100 to-red-200 rounded-xl p-6 text-center">
-                            <i class="fas fa-gamepad text-3xl text-red-600 mb-3"></i>
-                            <h3 class="font-medium text-gray-800">Gaming</h3>
+                    <div class="category-card flex-shrink-0 w-48 md:w-56 cursor-pointer" onclick="window.location.href='#'">
+                        <div class="bg-gradient-to-br from-blue-200 to-blue-400 rounded-2xl p-8 text-center h-48 flex flex-col items-center justify-center">
+                            <i class="fas fa-gamepad text-4xl md:text-5xl text-blue-800 mb-4"></i>
+                            <h3 class="font-semibold text-white text-lg">Gaming</h3>
+                        </div>
+                    </div>
+                    <div class="category-card flex-shrink-0 w-48 md:w-56 cursor-pointer" onclick="window.location.href='#'">
+                        <div class="bg-gradient-to-br from-slate-200 to-slate-400 rounded-2xl p-8 text-center h-48 flex flex-col items-center justify-center">
+                            <i class="fas fa-dumbbell text-4xl md:text-5xl text-slate-700 mb-4"></i>
+                            <h3 class="font-semibold text-gray-800 text-lg">Olahraga</h3>
+                        </div>
+                    </div>
+                    <div class="category-card flex-shrink-0 w-48 md:w-56 cursor-pointer" onclick="window.location.href='#'">
+                        <div class="bg-gradient-to-br from-gray-100 to-gray-300 rounded-2xl p-8 text-center h-48 flex flex-col items-center justify-center">
+                            <i class="fas fa-book text-4xl md:text-5xl text-gray-700 mb-4"></i>
+                            <h3 class="font-semibold text-gray-800 text-lg">Buku</h3>
                         </div>
                     </div>
                 </div>
@@ -338,7 +355,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gradient-to-br from-blue-800 via-blue-900 to-indigo-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
@@ -352,43 +369,44 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Menu</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('home') }}" class="text-gray-400 hover:text-white transition-colors">Beranda</a></li>
-                        <li><a href="{{ route('promo') }}" class="text-gray-400 hover:text-white transition-colors">Promo</a></li>
-                        <li><a href="{{ route('kategori') }}" class="text-gray-400 hover:text-white transition-colors">Kategori</a></li>
-                        <li><a href="{{ route('rekomendasi') }}" class="text-gray-400 hover:text-white transition-colors">Rekomendasi</a></li>
+                        <li><a href="{{ route('home') }}" class="text-blue-200 hover:text-white transition-colors">Beranda</a></li>
+                        <li><a href="{{ route('promo') }}" class="text-blue-200 hover:text-white transition-colors">Promo</a></li>
+                        <li><a href="{{ route('kategori') }}" class="text-blue-200 hover:text-white transition-colors">Kategori</a></li>
+                        <li><a href="{{ route('rekomendasi') }}" class="text-blue-200 hover:text-white transition-colors">Rekomendasi</a></li>
+                        <li><a href="{{ route('profile') }}" class="text-blue-200 hover:text-white transition-colors">Profil</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Bantuan</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pengiriman</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pengembalian</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Kontak</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-blue-200 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="{{ route('pengiriman') }}" class="text-blue-200 hover:text-white transition-colors">Pengiriman</a></li>
+                        <li><a href="{{ route('pengembalian') }}" class="text-blue-200 hover:text-white transition-colors">Pengembalian</a></li>
+                        <li><a href="{{ route('kontak') }}" class="text-blue-200 hover:text-white transition-colors">Kontak</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Ikuti Kami</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-blue-200 hover:text-white transition-colors">
                             <i class="fab fa-facebook-f text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-blue-200 hover:text-white transition-colors">
                             <i class="fab fa-instagram text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-blue-200 hover:text-white transition-colors">
                             <i class="fab fa-twitter text-xl"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-blue-200 hover:text-white transition-colors">
                             <i class="fab fa-youtube text-xl"></i>
                         </a>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <div class="border-t border-blue-700 mt-8 pt-8 text-center text-blue-200">
                 <p>&copy; 2024 ADR Catalogue. All rights reserved.</p>
             </div>
         </div>
@@ -402,12 +420,42 @@
         
         function scrollCategories(direction) {
             const container = document.getElementById('categoriesContainer');
-            const scrollAmount = 200;
+            const cardWidth = container.querySelector('.category-card').offsetWidth;
+            const gap = 24; // space-x-6 = 24px
+            const scrollAmount = cardWidth + gap;
             
             if (direction === 'left') {
-                container.scrollLeft -= scrollAmount;
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
             } else {
-                container.scrollLeft += scrollAmount;
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+        
+        // Touch support for mobile swiping
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        const categoriesContainer = document.getElementById('categoriesContainer');
+        
+        categoriesContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        categoriesContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    scrollCategories('right');
+                } else {
+                    scrollCategories('left');
+                }
             }
         }
         
