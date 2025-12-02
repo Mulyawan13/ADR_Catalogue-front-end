@@ -96,28 +96,35 @@
                     <span>Produk</span>
                     <div class="absolute inset-y-0 left-0 w-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
+
+                <a href="{{ route('admin.chat') }}" class="nav-item group flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->is('admin/chat') ? 'bg-white/20 text-white' : 'text-gray-300 hover:text-white hover:bg-white/10' }} transition-all duration-300">
+                    <i class="fas fa-comments w-5 h-5 mr-3"></i>
+                    <span>Chat</span>
+                    @if($unreadCount > 0)
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">{{ $unreadCount }}</span>
+                    @endif
+                    <div class="absolute inset-y-0 left-0 w-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+                
             </nav>
 
             <!-- User Section -->
             <div class="p-4 border-t border-gray-700">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-sm"></i>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-white">Admin User</p>
-                        <p class="text-xs text-gray-400">admin@adr.com</p>
-                    </div>
-                </div>
+                <a href="#" class="nav-item group relative flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+                    <i class="fas fa-user w-5 h-5 mr-3"></i>
+                    <span class="flex-1 truncate">{{ $admin->nama ?? 'Admin User' }}</span>
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-y-0 group-hover:scale-y-100"></div>
+                </a>
             </div>
 
             <!-- Logout Button -->
-            <div class="p-4 border-t border-gray-700 mt-auto">
+            <div class="p-4 border-t border-gray-700">
                 <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="w-full group flex items-center px-4 py-3 text-sm font-medium rounded-lg text-red-200 hover:text-white hover:bg-red-600 transition-all duration-300">
+                    <button type="submit" class="nav-item group relative w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
                         <i class="fas fa-sign-out-alt w-5 h-5 mr-3"></i>
                         <span>Logout</span>
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-y-0 group-hover:scale-y-100"></div>
                     </button>
                 </form>
             </div>
@@ -230,37 +237,8 @@
                 </div>
 
                 <!-- Revenue Chart Section -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                    <!-- Revenue Chart -->
-                    <div class="card-hover bg-white rounded-xl shadow-lg p-6 slide-in" style="animation-delay: 0.5s">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-800">Grafik Pendapatan</h3>
-                            <div class="flex space-x-2">
-                                <button class="px-3 py-1 bg-blue-100 text-blue-700 rounded-md text-sm hover:bg-blue-200 transition-colors">
-                                    Minggu Ini
-                                </button>
-                                <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm hover:bg-gray-200 transition-colors">
-                                    Bulan Ini
-                                </button>
-                            </div>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="revenueChart"></canvas>
-                        </div>
-                    </div>
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-8">
 
-                    <!-- Payment Methods Chart -->
-                    <div class="card-hover bg-white rounded-xl shadow-lg p-6 slide-in" style="animation-delay: 0.6s">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-800">Metode Pembayaran</h3>
-                            <button class="p-2 text-gray-600 hover:text-gray-800 transition-colors">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="paymentChart"></canvas>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Filters Section -->
@@ -308,11 +286,8 @@
 
                 <!-- Invoices Table -->
                 <div class="card-hover bg-white rounded-xl shadow-lg overflow-hidden slide-in" style="animation-delay: 0.8s">
-                    <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                    <div class="px-6 py-4 border-b border-gray-100">
                         <h3 class="text-lg font-semibold text-gray-800">Daftar Tagihan</h3>
-                        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm transition-colors">
-                            <i class="fas fa-download mr-2"></i> Export PDF
-                        </button>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="min-w-full">
@@ -506,44 +481,6 @@
                 });
             }
 
-            // Payment Methods Chart
-            const paymentCtx = document.getElementById('paymentChart');
-            if (paymentCtx) {
-                new Chart(paymentCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Transfer Bank', 'E-Wallet', 'Kartu Kredit', 'Tunai'],
-                        datasets: [{
-                            data: [45, 30, 15, 10],
-                            backgroundColor: [
-                                'rgba(59, 130, 246, 0.8)',
-                                'rgba(147, 51, 234, 0.8)',
-                                'rgba(251, 191, 36, 0.8)',
-                                'rgba(254, 178, 76, 0.8)'
-                            ],
-                            borderWidth: 2,
-                            borderColor: '#fff'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    usePointStyle: true,
-                                    padding: 20,
-                                    font: {
-                                        size: 12,
-                                        family: 'Poppins'
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
         });
     </script>
 </body>

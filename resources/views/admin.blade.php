@@ -94,19 +94,37 @@
                     <span>Produk</span>
                     <div class="absolute inset-y-0 left-0 w-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
+                
+                <a href="{{ route('admin.chat') }}" class="nav-item group flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->is('admin/chat') ? 'bg-white/20 text-white' : 'text-gray-300 hover:text-white hover:bg-white/10' }} transition-all duration-300">
+                    <i class="fas fa-comments w-5 h-5 mr-3"></i>
+                    <span>Chat</span>
+                    @if($unreadCount > 0)
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">{{ $unreadCount }}</span>
+                    @endif
+                    <div class="absolute inset-y-0 left-0 w-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </a>
+                
             </nav>
 
             <!-- User Section -->
             <div class="p-4 border-t border-gray-700">
-                <div class="flex items-center">
-                    <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-sm"></i>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium">Admin User</p>
-                        <p class="text-xs text-gray-400">admin@adr.com</p>
-                    </div>
-                </div>
+                <a href="#" class="nav-item group relative flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+                    <i class="fas fa-user w-5 h-5 mr-3"></i>
+                    <span class="flex-1 truncate">{{ $admin->nama ?? 'Admin User' }}</span>
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-y-0 group-hover:scale-y-100"></div>
+                </a>
+            </div>
+
+            <!-- Logout Button -->
+            <div class="p-4 border-t border-gray-700">
+                <form action="{{ route('admin.logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-item group relative w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+                        <i class="fas fa-sign-out-alt w-5 h-5 mr-3"></i>
+                        <span>Logout</span>
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-y-0 group-hover:scale-y-100"></div>
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -164,7 +182,7 @@
                                 </p>
                             </div>
                             <div class="p-3 bg-green-500 rounded-full">
-                                <i class="fas fa-shopping-cart text-white text-xl"></i>
+                                <i class="fas fa-shopping-bag text-white text-xl"></i>
                             </div>
                         </div>
                     </div>

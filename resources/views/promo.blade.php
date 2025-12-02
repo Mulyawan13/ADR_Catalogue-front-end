@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/promo.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         body { font-family: 'Poppins', sans-serif; }
         .promo-gradient {
@@ -38,58 +39,97 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        .countdown-badge {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
     </style>
 </head>
 
 <body class="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200">
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <!-- Modern Navbar -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-xl sticky top-0 z-50 border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo and Brand -->
                 <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0 flex items-center">
-                        <img class="h-10 w-auto" src="{{ asset('images/asset/logo.png') }}" alt="ADR Catalogue">
+                    <div class="flex-shrink-0 flex items-center group">
+                        <div class="relative">
+                            <img class="h-10 w-auto transition-transform duration-300 group-hover:scale-110" src="{{ asset('images/asset/logo.png') }}" alt="ADR Catalogue">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
                     </div>
                     <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                                <i class="fas fa-home mr-1"></i> Beranda
+                        <div class="ml-10 flex items-baseline space-x-1">
+                            <a href="{{ route('home') }}" class="nav-link group relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">
+                                <span class="flex items-center">
+                                    <i class="fas fa-home mr-2 text-sm group-hover:animate-pulse"></i>
+                                    <span class="relative">
+                                        Beranda
+                                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                                    </span>
+                                </span>
                             </a>
-                            <a href="{{ route('promo') }}" class="text-indigo-600 hover:text-indigo-800 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                                <i class="fas fa-tags mr-1"></i> Promo
+                            <a href="{{ route('promo') }}" class="nav-link group relative px-4 py-2 text-blue-600 font-medium transition-all duration-300">
+                                <span class="flex items-center">
+                                    <i class="fas fa-tags mr-2 text-sm group-hover:animate-pulse"></i>
+                                    <span class="relative">
+                                        Promo
+                                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"></span>
+                                    </span>
+                                </span>
                             </a>
-                            <a href="{{ route('kategori') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                                <i class="fas fa-th-large mr-1"></i> Kategori
+                            <a href="{{ route('kategori') }}" class="nav-link group relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">
+                                <span class="flex items-center">
+                                    <i class="fas fa-th-large mr-2 text-sm group-hover:animate-pulse"></i>
+                                    <span class="relative">
+                                        Kategori
+                                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                                    </span>
+                                </span>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Right side buttons -->
-                <div class="flex items-center space-x-4">
-                    <a href="{{ route('rekomendasi') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                        <i class="fas fa-star mr-1"></i> Rekomendasi
+                <div class="flex items-center space-x-2">
+                    <a href="{{ route('rekomendasi') }}" class="nav-link group relative px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">
+                        <span class="flex items-center">
+                            <i class="fas fa-star mr-2 text-sm group-hover:animate-pulse"></i>
+                            <span class="relative hidden sm:inline">
+                                Rekomendasi
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                            </span>
+                        </span>
                     </a>
-                    <a href="{{ route('profile') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                        <i class="fas fa-building mr-1"></i> Profil
+                    <a href="{{ route('checkout') }}" class="nav-link group relative px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">
+                        <span class="flex items-center">
+                            <i class="fas fa-shopping-cart mr-2 text-sm group-hover:animate-pulse"></i>
+                            <span class="relative hidden sm:inline">
+                                Keranjang
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                            </span>
+                        </span>
                     </a>
-                    <a href="{{ route('login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                        <i class="fas fa-user mr-1"></i> Masuk/Daftar
+                    <a href="{{ route('profile') }}" class="nav-link group relative px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition-all duration-300">
+                        <span class="flex items-center">
+                            <i class="fas fa-building mr-2 text-sm group-hover:animate-pulse"></i>
+                            <span class="relative hidden sm:inline">
+                                Profil
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></span>
+                            </span>
+                        </span>
+                    </a>
+                    <a href="{{ route('login') }}" class="group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                        <span class="flex items-center">
+                            <i class="fas fa-user mr-2 group-hover:animate-bounce"></i>
+                            <span class="hidden sm:inline">Masuk/Daftar</span>
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
                     </a>
                     
                     <!-- Mobile menu button -->
                     <div class="md:hidden">
-                        <button onclick="toggleMobileMenu()" class="text-gray-700 hover:text-indigo-600 p-2">
-                            <i class="fas fa-bars text-xl"></i>
+                        <button onclick="toggleMobileMenu()" class="group relative p-2 text-gray-700 hover:text-blue-600 transition-all duration-300">
+                            <i class="fas fa-bars text-xl group-hover:rotate-12 transition-transform duration-300"></i>
+                            <div class="absolute inset-0 bg-blue-100 rounded-lg blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
                         </button>
                     </div>
                 </div>
@@ -97,18 +137,84 @@
         </div>
         
         <!-- Mobile menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-200">
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Beranda</a>
-                <a href="{{ route('profile') }}" class="text-gray-700 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">
-                    <i class="fas fa-building mr-1"></i> Profil
+                <a href="{{ route('home') }}" class="mobile-nav-link group block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-300">
+                    <i class="fas fa-home mr-3 group-hover:animate-pulse"></i>
+                    Beranda
                 </a>
-                <a href="{{ route('login') }}" class="text-gray-700 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">
-                    <i class="fas fa-user mr-1"></i> Masuk
+                <a href="{{ route('promo') }}" class="mobile-nav-link group block px-4 py-3 text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-300">
+                    <i class="fas fa-tags mr-3 group-hover:animate-pulse"></i>
+                    Promo
+                </a>
+                <a href="{{ route('kategori') }}" class="mobile-nav-link group block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-300">
+                    <i class="fas fa-th-large mr-3 group-hover:animate-pulse"></i>
+                    Kategori
+                </a>
+                <a href="{{ route('rekomendasi') }}" class="mobile-nav-link group block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-300">
+                    <i class="fas fa-star mr-3 group-hover:animate-pulse"></i>
+                    Rekomendasi
+                </a>
+                <a href="{{ route('checkout') }}" class="mobile-nav-link group block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-300">
+                    <i class="fas fa-shopping-cart mr-3 group-hover:animate-pulse"></i>
+                    Keranjang
+                </a>
+                <a href="{{ route('profile') }}" class="mobile-nav-link group block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-medium transition-all duration-300">
+                    <i class="fas fa-building mr-3 group-hover:animate-pulse"></i>
+                    Profil
+                </a>
+                <a href="{{ route('login') }}" class="mobile-nav-link group block px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-user mr-3 group-hover:animate-bounce"></i>
+                    Masuk/Daftar
                 </a>
             </div>
         </div>
     </nav>
+
+    <style>
+    .nav-link {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(59, 130, 246, 0.1);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+    
+    .nav-link:hover::before {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .mobile-nav-link {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .mobile-nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+        transition: left 0.5s;
+    }
+    
+    .mobile-nav-link:hover::before {
+        left: 100%;
+    }
+    </style>
 
     <!-- Header Section -->
     <section class="promo-gradient text-white py-16">
@@ -122,7 +228,7 @@
         </div>
     </section>
 
-    <!-- Filter Section -->
+    <!-- Filter Section (Simplified) -->
     <section class="py-8 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
@@ -130,136 +236,11 @@
                     <button onclick="filterPromos('all')" class="filter-btn px-4 py-2 bg-indigo-600 text-white rounded-lg transition-colors">
                         Semua Promo
                     </button>
-                    <button onclick="filterPromos('flash')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg transition-colors">
-                        <i class="fas fa-bolt mr-1"></i> Flash Sale
-                    </button>
-                    <button onclick="filterPromos('discount')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg transition-colors">
-                        <i class="fas fa-percentage mr-1"></i> Diskon
-                    </button>
-                    <button onclick="filterPromos('bundle')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg transition-colors">
-                        <i class="fas fa-box mr-1"></i> Bundle
-                    </button>
-                    <button onclick="filterPromos('free')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg transition-colors">
-                        <i class="fas fa-gift mr-1"></i> Gratis Ongkir
-                    </button>
-                </div>
-                
-                <div class="relative">
-                    <select class="appearance-none bg-gray-100 border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-indigo-500">
-                        <option>Urutkan: Terbaru</option>
-                        <option>Urutkan: Populer</option>
-                        <option>Urutkan: Diskon Terbesar</option>
-                        <option>Urutkan: Akan Berakhir</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Promo -->
-    <section class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">Promo Unggulan</h2>
-                <p class="text-gray-600">Jangan lewatkan penawaran terbaik minggu ini</p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <!-- Big Promo Card -->
-                <div class="promo-card bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl overflow-hidden text-white slide-in" style="animation-delay: 0.1s">
-                    <div class="p-8">
-                        <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-medium mb-3 inline-block">
-                                    <i class="fas fa-fire mr-1"></i> Flash Sale
-                                </span>
-                                <h3 class="text-3xl font-bold mb-2">Mega Sale</h3>
-                                <p class="text-white/90 text-lg">Diskon hingga 70% untuk semua produk elektronik</p>
-                            </div>
-                            <div class="countdown-badge bg-red-500 text-white px-3 py-2 rounded-lg text-center">
-                                <p class="text-xs">Berakhir dalam</p>
-                                <p class="font-bold">23:45:30</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-4">
-                                <div>
-                                    <p class="text-white/80 text-sm">Harga Mulai</p>
-                                    <p class="text-2xl font-bold">Rp 99.000</p>
-                                </div>
-                                <div class="text-white/60 line-through">Rp 330.000</div>
-                            </div>
-                            <button class="bg-white text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                                <i class="fas fa-shopping-cart mr-2"></i> Beli Sekarang
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Multiple Small Promos -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="promo-card bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl p-6 text-white slide-in" style="animation-delay: 0.2s">
-                        <span class="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium mb-3 inline-block">
-                            <i class="fas fa-percentage mr-1"></i> Diskon
-                        </span>
-                        <h3 class="text-xl font-bold mb-2">Fashion Week</h3>
-                        <p class="text-white/90 text-sm mb-4">Diskon 50% semua produk fashion</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-lg font-bold">Rp 125.000</p>
-                            <button class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-lg text-sm hover:bg-white/30 transition-colors">
-                                Lihat
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="promo-card bg-gradient-to-br from-sky-400 to-sky-600 rounded-xl p-6 text-white slide-in" style="animation-delay: 0.3s">
-                        <span class="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium mb-3 inline-block">
-                            <i class="fas fa-box mr-1"></i> Bundle
-                        </span>
-                        <h3 class="text-xl font-bold mb-2">Paket Hemat</h3>
-                        <p class="text-white/90 text-sm mb-4">Beli 2 gratis 1 untuk produk pilihan</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-lg font-bold">Mulai Rp 75.000</p>
-                            <button class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-lg text-sm hover:bg-white/30 transition-colors">
-                                Lihat
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="promo-card bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-xl p-6 text-white slide-in" style="animation-delay: 0.4s">
-                        <span class="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium mb-3 inline-block">
-                            <i class="fas fa-gift mr-1"></i> Gratis Ongkir
-                        </span>
-                        <h3 class="text-xl font-bold mb-2">Ongkir Gratis</h3>
-                        <p class="text-white/90 text-sm mb-4">Gratis ongkir minimal pembelian Rp 100.000</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-lg font-bold">Hemat Rp 15.000</p>
-                            <button class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-lg text-sm hover:bg-white/30 transition-colors">
-                                Lihat
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="promo-card bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-xl p-6 text-white slide-in" style="animation-delay: 0.5s">
-                        <span class="bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full text-xs font-medium mb-3 inline-block">
-                            <i class="fas fa-crown mr-1"></i> VIP
-                        </span>
-                        <h3 class="text-xl font-bold mb-2">Member Exclusive</h3>
-                        <p class="text-white/90 text-sm mb-4">Diskon khusus member VIP</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-lg font-bold">Hingga 25%</p>
-                            <button class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-lg text-sm hover:bg-white/30 transition-colors">
-                                Lihat
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- All Promos Grid -->
     <section class="py-12 bg-white">
@@ -496,6 +477,7 @@
                         <li><a href="{{ route('promo') }}" class="text-blue-200 hover:text-white transition-colors">Promo</a></li>
                         <li><a href="{{ route('kategori') }}" class="text-blue-200 hover:text-white transition-colors">Kategori</a></li>
                         <li><a href="{{ route('rekomendasi') }}" class="text-blue-200 hover:text-white transition-colors">Rekomendasi</a></li>
+                        <li><a href="{{ route('checkout') }}" class="text-blue-200 hover:text-white transition-colors">Keranjang</a></li>
                         <li><a href="{{ route('profile') }}" class="text-blue-200 hover:text-white transition-colors">Profil</a></li>
                     </ul>
                 </div>
@@ -541,50 +523,9 @@
             menu.classList.toggle('hidden');
         }
         
-        function filterPromos(type) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'text-white');
-                btn.classList.add('bg-gray-200', 'text-gray-700');
-            });
-            
-            event.target.classList.remove('bg-gray-200', 'text-gray-700');
-            event.target.classList.add('bg-indigo-600', 'text-white');
-            
-            // Here you would typically filter promos based on type
-            console.log('Filtering promos by:', type);
-        }
-        
-        // Countdown timer simulation
-        function updateCountdown() {
-            const countdownElements = document.querySelectorAll('.countdown-badge p.font-bold');
-            countdownElements.forEach(element => {
-                // Simulate countdown (in real app, this would calculate actual remaining time)
-                const time = element.textContent;
-                const parts = time.split(':');
-                let hours = parseInt(parts[0]);
-                let minutes = parseInt(parts[1]);
-                let seconds = parseInt(parts[2]);
-                
-                seconds--;
-                if (seconds < 0) {
-                    seconds = 59;
-                    minutes--;
-                    if (minutes < 0) {
-                        minutes = 59;
-                        hours--;
-                        if (hours < 0) {
-                            hours = 23;
-                        }
-                    }
-                }
-                
-                element.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            });
-        }
-        
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
     </script>
+
+    <!-- Chat Bot Component (Available for all users) -->
+    @include('components.chat_bot')
 </body>
 </html>

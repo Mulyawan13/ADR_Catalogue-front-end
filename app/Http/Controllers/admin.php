@@ -5,14 +5,60 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Chat;
 
 class admin extends Controller
 {
+    public function dashboard()
+    {
+        // Get unread messages count
+        $unreadCount = Chat::where('is_read', false)
+                           ->where('sender', 'user')
+                           ->count();
+
+        return view('admin', compact('unreadCount'));
+    }
+
+    public function orders()
+    {
+        // Get unread messages count
+        $unreadCount = Chat::where('is_read', false)
+                           ->where('sender', 'user')
+                           ->count();
+
+        return view('admin_orders', compact('unreadCount'));
+    }
+
+    public function statistics()
+    {
+        // Get unread messages count
+        $unreadCount = Chat::where('is_read', false)
+                           ->where('sender', 'user')
+                           ->count();
+
+        return view('admin_statistics', compact('unreadCount'));
+    }
+
+    public function billing()
+    {
+        // Get unread messages count
+        $unreadCount = Chat::where('is_read', false)
+                           ->where('sender', 'user')
+                           ->count();
+
+        return view('admin_billing', compact('unreadCount'));
+    }
+
     public function products()
     {
+        // Get unread messages count
+        $unreadCount = Chat::where('is_read', false)
+                           ->where('sender', 'user')
+                           ->count();
+
         $products = Product::with('category')->get();
         $categories = Category::all();
-        return view('admin_products', compact('products', 'categories'));
+        return view('admin_products', compact('products', 'categories', 'unreadCount'));
     }
 
     public function storeProduct(Request $request)

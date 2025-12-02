@@ -9,38 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Poppins', sans-serif; }
-        .register-gradient {
-            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
-        }
-        .form-input:focus {
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        .slide-in {
-            animation: slideIn 0.5s ease-out;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .password-strength-bar {
-            height: 4px;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-        .strength-weak { background-color: #ef4444; width: 33%; }
-        .strength-medium { background-color: #f59e0b; width: 66%; }
-        .strength-strong { background-color: #10b981; width: 100%; }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 </head>
 
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 py-12 px-4">
@@ -333,5 +302,7 @@
             submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mendaftar...';
         });
     </script>
+    
+    
 </body>
 </html>

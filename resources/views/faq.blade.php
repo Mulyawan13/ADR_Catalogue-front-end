@@ -9,27 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Poppins', sans-serif; }
-        .faq-gradient {
-            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 25%, #60a5fa 50%, #3b82f6 75%, #2563eb 100%);
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-        .accordion-content.active {
-            max-height: 500px;
-            transition: max-height 0.3s ease-in;
-        }
-        .rotate-icon {
-            transition: transform 0.3s ease;
-        }
-        .rotate-icon.active {
-            transform: rotate(180deg);
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/faq.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body class="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200">
@@ -62,6 +43,9 @@
                     <a href="{{ route('rekomendasi') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                         <i class="fas fa-star mr-1"></i> Rekomendasi
                     </a>
+                    <a href="{{ route('checkout') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <i class="fas fa-shopping-cart mr-1"></i> Keranjang
+                    </a>
                     <a href="{{ route('profile') }}" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                         <i class="fas fa-building mr-1"></i> Profil
                     </a>
@@ -83,6 +67,9 @@
         <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-200">
             <div class="px-2 pt-2 pb-3 space-y-1">
                 <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">Beranda</a>
+                <a href="{{ route('checkout') }}" class="text-gray-700 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">
+                    <i class="fas fa-shopping-cart mr-1"></i> Keranjang
+                </a>
                 <a href="{{ route('profile') }}" class="text-gray-700 hover:text-indigo-600 block px-3 py-2 rounded-md text-base font-medium">
                     <i class="fas fa-building mr-1"></i> Profil
                 </a>
@@ -242,7 +229,7 @@
                             </button>
                             <div class="accordion-content">
                                 <p class="text-gray-600 pt-3">
-                                    Biaya pengiriman dihitung berdasarkan berat produk dan jarak pengiriman. Anda bisa melihat estimasi biaya di halaman checkout sebelum melakukan pembayaran. Kami juga sering menawarkan gratis ongkir untuk minimum pembelian tertentu.
+                                    Biaya pengiriman dihitung berdasarkan berat produk dan jarak pengiriman. Estimasi biaya akan ditampilkan saat Anda melihat detail produk. Kami juga sering menawarkan gratis ongkir untuk minimum pembelian tertentu.
                                 </p>
                             </div>
                         </div>
@@ -322,6 +309,7 @@
                         <li><a href="{{ route('promo') }}" class="text-blue-200 hover:text-white transition-colors">Promo</a></li>
                         <li><a href="{{ route('kategori') }}" class="text-blue-200 hover:text-white transition-colors">Kategori</a></li>
                         <li><a href="{{ route('rekomendasi') }}" class="text-blue-200 hover:text-white transition-colors">Rekomendasi</a></li>
+                        <li><a href="{{ route('checkout') }}" class="text-blue-200 hover:text-white transition-colors">Keranjang</a></li>
                         <li><a href="{{ route('profile') }}" class="text-blue-200 hover:text-white transition-colors">Profil</a></li>
                     </ul>
                 </div>
@@ -411,5 +399,9 @@
             alert('Live chat akan segera tersedia. Silakan hubungi customer service melalui email atau telepon.');
         }
     </script>
+    
+    <!-- Chat Bot -->
+    @include('components.chat_bot')
+    
 </body>
 </html>
